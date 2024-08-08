@@ -91,10 +91,29 @@ export default function Home() {
       justifyContent="center"
       alignItems="center"
     >
-      <Stack direction="column" width={500} height={700} border="2px solid black" p={2}>
-        <Stack direction="column" spacing={2} flexGrow={1}>
+      <Stack 
+        direction="column" 
+        width={500} 
+        height={700} 
+        border="2px solid black" 
+        p={2}
+      >
+        <Stack 
+          direction="column" 
+          spacing={2} 
+          flexGrow={1} 
+          overflow="auto"  // Added overflow to enable scrolling
+          sx={{ 
+            maxHeight: 'calc(100% - 64px)', // Subtract height of input field area
+            overflowY: 'auto' // Ensure vertical scrolling when content overflows
+          }}
+        >
           {messages.map((message, index) => (
-            <Box key={index} display="flex" justifyContent={message.role === 'assistant' ? 'flex-start' : 'flex-end'}>
+            <Box 
+              key={index} 
+              display="flex" 
+              justifyContent={message.role === 'assistant' ? 'flex-start' : 'flex-end'}
+            >
               <Box
                 bgcolor={message.role === 'assistant' ? 'primary.main' : 'secondary.main'}
                 color={"white"}
@@ -107,7 +126,11 @@ export default function Home() {
           ))}
           <div ref={messagesEndRef} />
         </Stack>
-        <Stack direction="row" spacing={2}>
+        <Stack 
+          direction="row" 
+          spacing={2}
+          sx={{ pt: 2 }} // Added padding-top to separate from messages
+        >
           <TextField
             label="Message"
             fullWidth
